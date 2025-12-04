@@ -135,6 +135,9 @@ spec:
   hostPath:
     path: "/mnt/data/mongodb-0"
   persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: default
+    name: data-mongodb-0
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -151,6 +154,9 @@ spec:
   hostPath:
     path: "/mnt/data/mongodb-1"
   persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: default
+    name: data-mongodb-1
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -167,6 +173,9 @@ spec:
   hostPath:
     path: "/mnt/data/mongodb-2"
   persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: default
+    name: data-mongodb-2
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -183,11 +192,15 @@ spec:
   hostPath:
     path: "/mnt/data/mongodb-3"
   persistentVolumeReclaimPolicy: Retain
----
+  claimRef:
+    namespace: default
+    name: data-mongodb-3
+controlplane:~$ vi pv.yaml 
+controlplane:~$ cat pv.yaml 
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: pv-mongodb-4
+  name: pv-mongodb-0
   labels:
     type: local
 spec:
@@ -197,8 +210,68 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/mnt/data/mongodb-4"
+    path: "/mnt/data/mongodb-0"
   persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: default
+    name: data-mongodb-0
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-mongodb-1
+  labels:
+    type: local
+spec:
+  storageClassName: mongodb-sc
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data/mongodb-1"
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: default
+    name: data-mongodb-1
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-mongodb-2
+  labels:
+    type: local
+spec:
+  storageClassName: mongodb-sc
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data/mongodb-2"
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: default
+    name: data-mongodb-2
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-mongodb-3
+  labels:
+    type: local
+spec:
+  storageClassName: mongodb-sc
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data/mongodb-3"
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: default
+    name: data-mongodb-3
 ```
 
 Apply the PersistentVolumes:
